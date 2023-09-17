@@ -4,6 +4,7 @@ CoinMarketCapにリスティングされているコイン価格をトラッキ�
 # 使用方法
 **基本的にBotのアクティビティ欄にコインの価格が表示されます。**
 ![IMG_2201](https://github.com/yblockcha1n/TokenPriceTracker_DiscordBot/assets/144770048/7701601e-84cd-4447-a15f-5c92feaeb8dd)
+
 これは標準で**1分毎**に更新するようにコーディングしており、API枠を節約したい方は任意の時間に変更してください。
 
 `@tasks.loop(minutes=1) #更新/1分`
