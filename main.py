@@ -10,6 +10,8 @@ API_KEY = "CMC_API_KEY"
 intents = discord.Intents.default()
 intents.typing = False
 intents.presences = False
+intents.message_content = True
+
 client = commands.Bot(command_prefix="/", intents=intents)
 
 def format_price(price):
@@ -22,8 +24,9 @@ def format_price(price):
     elif price < 100:
         return f"${price:.2f}" #$100未満の場合、2桁まで表示
     else:
-        return f"${price:.0f}" #$100以上の場合、整数のみ表示
+        return f"${price:.0f}" #$100以上の場合、整数のみ表
 
+# Botアクティビティ欄の価格表示
 @tasks.loop(minutes=1)
 async def update_coin_price():
     symbol = "COIN_SYMBOL" #任意のコインシンボルを大文字で指定 (ex. BTC)
@@ -37,6 +40,20 @@ async def update_coin_price():
         formatted_price = format_price(price)
         activity = discord.Activity(type=discord.ActivityType.watching, name=formatted_price)
         await client.change_presence(activity=activity)
+        
+# /chartコマンドの価格送信
+@client.command()
+async def price(ctx):
+    symbol = "COIN_SYMBOL" #任意のコインシンボルを大文字で指定 (ex. BTC)
+
+    url = f"https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol={symbol}&CMC_PRO_API_KEY={API_KEY}"
+    response = requests.get(url)
+    data = response.json()
+
+    if "data" in data and symbol in data["data"]:
+        price = data["data"][symbol]["quote"]["USD"]["price"]
+        formatted_price = format_price(price)
+        await ctx.send(f"現在の$〇〇価格は{formatted_price}です。") #〇〇は任意
 
 @client.event
 async def on_ready():
