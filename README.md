@@ -1,0 +1,2 @@
+# TokenPriceTracker_DiscordBot
+CoinMarketCapにリスティングされているコイン価格をトラッキングすることができます。詳細はREADMEから🫡
