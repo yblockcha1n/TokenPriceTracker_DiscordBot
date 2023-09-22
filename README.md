@@ -9,6 +9,5 @@ CoinMarketCapにリスティングされているコイン価格をトラッキ�
 
 `@tasks.loop(minutes=1) #更新/1分`
 
-また、`/chart 〇〇`とコマンドをDiscordチャンネルに打ち込むことで、コインの価格が返答されます。
-※〇〇は指定したコインシンボルを入力してください。
+また、`/price`とコマンドをDiscordチャンネルに打ち込むことで、コインの価格が返答されます。
 ![Screen-Recording-2023-09-18-at-0 54 28](https://github.com/yblockcha1n/TokenPriceTracker_DiscordBot/assets/144770048/444b5715-a415-477c-a849-088a3d9fe25b)
